@@ -40,12 +40,12 @@ class App extends React.Component {
 
   //displaying the songlist on the web using the SongTiles
   renderList = () => {
-    console.log(this.state.songList);
     return this.state.songList.map((item) => (
       <SongTiles
         key={this.state.songList.indexOf(item)}
         songItem={item}
         editItem={this.editItem}
+        formShow={this.state.formShow}
       />
     ));
   };
@@ -56,7 +56,6 @@ class App extends React.Component {
 
   // what to do when we add information
   handleSubmit = (item) => {
-    console.log(item);
     // for updating ratings
     if (item.id) {
       axios
@@ -82,11 +81,17 @@ class App extends React.Component {
       artist: "",
       rating: undefined,
     };
-    this.setState({ currentItem: item, formShow: !this.state.formShow });
+    this.setState({
+      currentItem: item,
+      formShow: true,
+    });
   };
 
   editItem = (item) => {
-    this.setState({ currentItem: item, formShow: !this.state.formShow });
+    this.setState({
+      currentItem: item,
+      formShow: true,
+    });
   };
 
   render = () => {
@@ -101,7 +106,11 @@ class App extends React.Component {
         ) : null}
 
         {this.renderList()}
-        <button onClick={this.createItem} className="btn btn-primary">
+        <button
+          onClick={this.createItem}
+          className="btn btn-primary"
+          disabled={this.state.formShow}
+        >
           Add task
         </button>
       </div>

@@ -1,12 +1,9 @@
 import React from "react";
+import "bootstrap/dist/css/bootstrap.css";
 
 export default class SongTiles extends React.Component {
   constructor(props) {
     super(props);
-
-    // this.state = {
-    //   songItem: this.props.songItem,
-    // };
   }
 
   render = () => {
@@ -19,7 +16,8 @@ export default class SongTiles extends React.Component {
         <span>
           <button
             onClick={() => editItem(this.props.songItem)}
-            className="btn btn-secondary mr-2"
+            className="btn btn-secondary"
+            disabled={this.props.formShow}
           >
             {" "}
             Edit{" "}

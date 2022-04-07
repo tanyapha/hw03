@@ -21,7 +21,6 @@ export default class SongForm extends React.Component {
   render() {
     // get the onSave function from App.js
     const { onSave, closeForm } = this.props;
-    console.log(this.state.currentItem);
     return (
       <div>
         <button
