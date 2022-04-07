@@ -12,11 +12,12 @@ class App extends React.Component {
     this.state = {
       currentItem: {
         username: "tanya",
-        song: "",
+        song: "hello",
         artist: "",
         rating: 0,
       },
       songList: [],
+      formShow: false,
     };
   }
 
@@ -39,11 +40,23 @@ class App extends React.Component {
 
   //displaying the songlist on the web using the SongTiles
   renderList = () => {
-    return this.state.songList.map((item) => <SongTiles songItem={item} />);
+    console.log(this.state.songList);
+    return this.state.songList.map((item) => (
+      <SongTiles
+        key={this.state.songList.indexOf(item)}
+        songItem={item}
+        editItem={this.editItem}
+      />
+    ));
+  };
+
+  closeForm = () => {
+    this.setState({ formShow: false });
   };
 
   // what to do when we add information
   handleSubmit = (item) => {
+    console.log(item);
     // for updating ratings
     if (item.id) {
       axios
@@ -62,14 +75,35 @@ class App extends React.Component {
     });
   };
 
+  createItem = () => {
+    const item = {
+      username: "tanya",
+      song: "",
+      artist: "",
+      rating: undefined,
+    };
+    this.setState({ currentItem: item, formShow: !this.state.formShow });
+  };
+
+  editItem = (item) => {
+    this.setState({ currentItem: item, formShow: !this.state.formShow });
+  };
+
   render = () => {
     return (
       <div>
-        <SongForm
-          currentItem={this.state.currentItem}
-          onSave={this.handleSubmit}
-        />
+        {this.state.formShow ? (
+          <SongForm
+            currentItem={this.state.currentItem}
+            onSave={this.handleSubmit}
+            closeForm={this.closeForm}
+          />
+        ) : null}
+
         {this.renderList()}
+        <button onClick={this.createItem} className="btn btn-primary">
+          Add task
+        </button>
       </div>
     );
   };

@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, FormGroup, Collapse, Label, Input, Button } from "reactstrap";
+import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 
 export default class SongForm extends React.Component {
   // currentItem -> the item we are currently editing or adding
@@ -20,9 +20,16 @@ export default class SongForm extends React.Component {
 
   render() {
     // get the onSave function from App.js
-    const { onSave } = this.props;
+    const { onSave, closeForm } = this.props;
+    console.log(this.state.currentItem);
     return (
       <div>
+        <button
+          type="button"
+          className="btn-close"
+          aria-label="Close"
+          onClick={() => closeForm()}
+        ></button>
         <Form>
           <FormGroup>
             <Label for="song">Song Name</Label>
