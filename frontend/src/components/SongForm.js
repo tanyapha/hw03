@@ -14,7 +14,7 @@ export default class SongForm extends React.Component {
     super(props);
     this.state = {
       currentItem: this.props.currentItem,
-      validRating: true,
+      validRating: null,
     };
   }
 
@@ -30,6 +30,8 @@ export default class SongForm extends React.Component {
     const rating = event.target.value;
     if (rating < 0 || rating > 5) {
       this.setState({ validRating: false });
+    } else if (rating === "") {
+      this.setState({ validRating: null });
     } else {
       this.setState({ validRating: true });
     }
@@ -86,7 +88,17 @@ export default class SongForm extends React.Component {
             <FormFeedback> ❌ Your rating should be between 0-5</FormFeedback>
           </FormGroup>
         </Form>
-        <Button color="success" onClick={() => onSave(this.state.currentItem)}>
+        <Button
+          color="success"
+          onClick={() => onSave(this.state.currentItem)}
+          disabled={
+            this.state.currentItem.song === "" ||
+            this.state.currentItem.artist === "" ||
+            !this.state.validRating
+              ? true
+              : false
+          }
+        >
           Save
         </Button>
       </div>
