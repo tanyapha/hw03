@@ -12,7 +12,7 @@ class App extends React.Component {
     this.state = {
       currentItem: {
         username: "tanya",
-        song: "hello",
+        song: "",
         artist: "",
         rating: 0,
       },
