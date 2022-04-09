@@ -1,5 +1,12 @@
 import React from "react";
-import { Form, FormGroup, Label, Input, Button } from "reactstrap";
+import {
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Button,
+  FormFeedback,
+} from "reactstrap";
 
 export default class SongForm extends React.Component {
   // currentItem -> the item we are currently editing or adding
@@ -7,6 +14,7 @@ export default class SongForm extends React.Component {
     super(props);
     this.state = {
       currentItem: this.props.currentItem,
+      validRating: null,
     };
   }
 
@@ -16,6 +24,17 @@ export default class SongForm extends React.Component {
     const currentItem = { ...this.state.currentItem, [name]: value };
 
     this.setState({ currentItem });
+  };
+
+  validateInput = (event) => {
+    const rating = event.target.value;
+    if (rating < 0 || rating > 5) {
+      this.setState({ validRating: false });
+    } else if (rating === "") {
+      this.setState({ validRating: null });
+    } else {
+      this.setState({ validRating: true });
+    }
   };
 
   render() {
@@ -38,6 +57,7 @@ export default class SongForm extends React.Component {
               onChange={this.handleChange}
               value={this.state.currentItem.song}
               placeholder="Enter a song name"
+              disabled={this.props.editing}
             ></Input>
           </FormGroup>
           <FormGroup>
@@ -48,6 +68,7 @@ export default class SongForm extends React.Component {
               onChange={this.handleChange}
               value={this.state.currentItem.artist}
               placeholder="Enter an artist name"
+              disabled={this.props.editing}
             ></Input>
           </FormGroup>
           <FormGroup>
@@ -55,13 +76,29 @@ export default class SongForm extends React.Component {
             <Input
               type="number"
               name="rating"
-              onChange={this.handleChange}
+              valid={this.state.validRating === true}
+              invalid={this.state.validRating === false}
+              onChange={(event) => {
+                this.validateInput(event);
+                this.handleChange(event);
+              }}
               value={this.state.currentItem.rating}
               placeholder="Enter a Rating"
             ></Input>
+            <FormFeedback> ❌ Your rating should be between 0-5</FormFeedback>
           </FormGroup>
         </Form>
-        <Button color="success" onClick={() => onSave(this.state.currentItem)}>
+        <Button
+          color="success"
+          onClick={() => onSave(this.state.currentItem)}
+          disabled={
+            this.state.currentItem.song === "" ||
+            this.state.currentItem.artist === "" ||
+            !this.state.validRating
+              ? true
+              : false
+          }
+        >
           Save
         </Button>
       </div>

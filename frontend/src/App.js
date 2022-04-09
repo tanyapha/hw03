@@ -18,6 +18,7 @@ class App extends React.Component {
       },
       songList: [],
       formShow: false,
+      editing: false,
     };
   }
 
@@ -84,6 +85,7 @@ class App extends React.Component {
     this.setState({
       currentItem: item,
       formShow: true,
+      editing: false,
     });
   };
 
@@ -91,6 +93,7 @@ class App extends React.Component {
     this.setState({
       currentItem: item,
       formShow: true,
+      editing: true,
     });
   };
 
@@ -102,6 +105,7 @@ class App extends React.Component {
             currentItem={this.state.currentItem}
             onSave={this.handleSubmit}
             closeForm={this.closeForm}
+            editing={this.state.editing}
           />
         ) : null}
 
