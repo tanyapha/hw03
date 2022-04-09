@@ -95,7 +95,6 @@ class App extends React.Component {
       formShow: true,
       editing: true,
     });
-    console.log(this.state.editing);
   };
 
   render = () => {

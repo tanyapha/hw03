@@ -1,5 +1,12 @@
 import React from "react";
-import { Form, FormGroup, Label, Input, Button } from "reactstrap";
+import {
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Button,
+  FormFeedback,
+} from "reactstrap";
 
 export default class SongForm extends React.Component {
   // currentItem -> the item we are currently editing or adding
@@ -7,6 +14,7 @@ export default class SongForm extends React.Component {
     super(props);
     this.state = {
       currentItem: this.props.currentItem,
+      validRating: true,
     };
   }
 
@@ -18,9 +26,17 @@ export default class SongForm extends React.Component {
     this.setState({ currentItem });
   };
 
+  validateInput = (event) => {
+    const rating = event.target.value;
+    if (rating < 0 || rating > 5) {
+      this.setState({ validRating: false });
+    } else {
+      this.setState({ validRating: true });
+    }
+  };
+
   render() {
     // get the onSave function from App.js
-    console.log(this.props.editing);
     const { onSave, closeForm } = this.props;
     return (
       <div>
@@ -58,10 +74,16 @@ export default class SongForm extends React.Component {
             <Input
               type="number"
               name="rating"
-              onChange={this.handleChange}
+              valid={this.state.validRating === true}
+              invalid={this.state.validRating === false}
+              onChange={(event) => {
+                this.validateInput(event);
+                this.handleChange(event);
+              }}
               value={this.state.currentItem.rating}
               placeholder="Enter a Rating"
             ></Input>
+            <FormFeedback> ❌ Your rating should be between 0-5</FormFeedback>
           </FormGroup>
         </Form>
         <Button color="success" onClick={() => onSave(this.state.currentItem)}>
