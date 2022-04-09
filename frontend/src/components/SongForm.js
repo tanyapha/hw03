@@ -20,6 +20,7 @@ export default class SongForm extends React.Component {
 
   render() {
     // get the onSave function from App.js
+    console.log(this.props.editing);
     const { onSave, closeForm } = this.props;
     return (
       <div>
@@ -38,6 +39,7 @@ export default class SongForm extends React.Component {
               onChange={this.handleChange}
               value={this.state.currentItem.song}
               placeholder="Enter a song name"
+              disabled={this.props.editing}
             ></Input>
           </FormGroup>
           <FormGroup>
@@ -48,6 +50,7 @@ export default class SongForm extends React.Component {
               onChange={this.handleChange}
               value={this.state.currentItem.artist}
               placeholder="Enter an artist name"
+              disabled={this.props.editing}
             ></Input>
           </FormGroup>
           <FormGroup>
