@@ -7,7 +7,7 @@ export default class SongTiles extends React.Component {
   }
 
   render = () => {
-    const { editItem } = this.props;
+    const { editItem, onDelete } = this.props;
     return (
       <div>
         <h1 className="song-name">{this.props.songItem.song}</h1>
@@ -21,6 +21,14 @@ export default class SongTiles extends React.Component {
           >
             {" "}
             Edit{" "}
+          </button>
+          <button
+            onClick={() => onDelete(this.props.songItem)}
+            className="btn btn-danger"
+            disabled={this.props.formShow}
+          >
+            {" "}
+            Delete{" "}
           </button>
         </span>
       </div>

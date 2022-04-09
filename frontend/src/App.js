@@ -47,6 +47,7 @@ class App extends React.Component {
         songItem={item}
         editItem={this.editItem}
         formShow={this.state.formShow}
+        onDelete={this.handleDelete}
       />
     ));
   };
@@ -71,6 +72,13 @@ class App extends React.Component {
     // database.
     axios.post("http://localhost:8000/api/rating/", item).then((res) => {
       console.log("yay, its been added!!!");
+      this.refreshList();
+    });
+  };
+
+  handleDelete = (item) => {
+    axios.delete(`http://localhost:8000/api/rating/${item.id}`).then((res) => {
+      console.log("DELETED 👋🏼 !!!");
       this.refreshList();
     });
   };
