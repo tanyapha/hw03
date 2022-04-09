@@ -109,8 +109,13 @@ class App extends React.Component {
   render = () => {
     return (
       <div>
-        <h1 className="title">Song Rator</h1>
+        <p className="title">Song Rator</p>
         <div className="body">
+          <div className="songList">
+            {this.renderList()}
+          </div>
+
+          <div className="form">
           {this.state.formShow ? (
             <SongForm
               currentItem={this.state.currentItem}
@@ -119,17 +124,14 @@ class App extends React.Component {
               editing={this.state.editing}
             />
           ) : null}
-
-          {this.renderList()}
-
-          <button
-            onClick={this.createItem}
-            className="btn btn-primary"
-            disabled={this.state.formShow}
-          >
-            Add a song
-          </button>
+          </div>
         </div>
+
+        <button
+          onClick={this.createItem}
+          className="btn btn-primary"
+          disabled={this.state.formShow}
+        >New song</button>
       </div>
     );
   };

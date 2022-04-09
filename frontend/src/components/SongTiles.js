@@ -11,7 +11,7 @@ export default class SongTiles extends React.Component {
     const { editItem, onDelete } = this.props;
     return (
       <div>
-        <h1 className="song-name">{this.props.songItem.song}</h1>
+        <p className="song-name">{this.props.songItem.song}</p>
         <p className="artist-name">{this.props.songItem.artist}</p>
         <p className="rating">{this.props.songItem.rating}</p>
         <span>

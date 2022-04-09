@@ -12,10 +12,27 @@
 .title {
   margin-top: 10px;
   text-align: center;
+  font-size: 50px;
 }
 
 .body {
   margin-left: 15px;
+  overflow: hidden;
+}
+
+/* SongTiles.js */
+.song-name {
+  font-size: 40px;
+  word-break: break-all;
+}
+
+.artist-name {
+  font-size: 20px;
+  word-break: break-all;
+}
+
+.rating {
+  font-size: 20px;
 }
 
 .btn{
@@ -23,10 +40,13 @@
   margin-right: 5px;
 }
 
-.artist-name {
-  font-size: 20px;
+.songList {
+  /* display: inline-block; */
+  float: left;
+  width: 50vw;
 }
-
-.rating {
-  font-size: 20px;
+.form {
+  /* display: inline-block; */
+  float: left;
+  width: 80vh;
 }
