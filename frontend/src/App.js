@@ -1,6 +1,7 @@
 import logo from "./logo.svg";
 import React from "react";
 import "./App.css";
+import "./style.css";
 import SongForm from "./components/SongForm";
 import axios from "axios";
 import SongTiles from "./components/SongTiles";
@@ -108,23 +109,27 @@ class App extends React.Component {
   render = () => {
     return (
       <div>
-        {this.state.formShow ? (
-          <SongForm
-            currentItem={this.state.currentItem}
-            onSave={this.handleSubmit}
-            closeForm={this.closeForm}
-            editing={this.state.editing}
-          />
-        ) : null}
+        <h1 className="title">Song Rator</h1>
+        <div className="body">
+          {this.state.formShow ? (
+            <SongForm
+              currentItem={this.state.currentItem}
+              onSave={this.handleSubmit}
+              closeForm={this.closeForm}
+              editing={this.state.editing}
+            />
+          ) : null}
 
-        {this.renderList()}
-        <button
-          onClick={this.createItem}
-          className="btn btn-primary"
-          disabled={this.state.formShow}
-        >
-          Add task
-        </button>
+          {this.renderList()}
+
+          <button
+            onClick={this.createItem}
+            className="btn btn-primary"
+            disabled={this.state.formShow}
+          >
+            Add a song
+          </button>
+        </div>
       </div>
     );
   };

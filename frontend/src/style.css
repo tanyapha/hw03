@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap');
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  background-color: #262626;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  color: white;
+}
+
+.title {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.body {
+  margin-left: 15px;
+}
+
+.btn{
+  margin-bottom: 30px;
+  margin-right: 5px;
+}
+
+.artist-name {
+  font-size: 20px;
+}
+
+.rating {
+  font-size: 20px;
+}
