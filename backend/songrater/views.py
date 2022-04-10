@@ -2,6 +2,9 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from .serializer import UserSerializer,RatingSerializer
 from .models import User,Rating
+from django.db.models import Avg
+from rest_framework.decorators import action
+from rest_framework.response import Response
 
 # Create your views here.
 class UserView(viewsets.ModelViewSet):
@@ -11,3 +14,8 @@ class UserView(viewsets.ModelViewSet):
 class RatingView(viewsets.ModelViewSet):
     serializer_class = RatingSerializer
     queryset = Rating.objects.all()
+
+    @action(detail=False, methods=['get'], name='Get Average')
+    def get_average(self, request):
+        avg_rating = Rating.objects.values("song","artist").annotate(average_rating=Avg('rating'))
+        return Response(avg_rating)
