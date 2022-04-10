@@ -14,8 +14,9 @@ class UserView(viewsets.ModelViewSet):
 class RatingView(viewsets.ModelViewSet):
     serializer_class = RatingSerializer
     queryset = Rating.objects.all()
+    filter_fields = ('username', 'song')
 
     @action(detail=False, methods=['get'], name='Get Average')
     def get_average(self, request):
-        avg_rating = Rating.objects.values("song","artist").annotate(average_rating=Avg('rating'))
+        avg_rating = Rating.objects.values("song","artist").annotate(rating=Avg('rating'))
         return Response(avg_rating)

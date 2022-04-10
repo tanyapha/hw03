@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'songrater',
     'corsheaders',
-    'rest_framework'
+    'rest_framework',
+    'django_filters'
 ]
 
 MIDDLEWARE = [
@@ -58,6 +59,11 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000'
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ),
+}
 ROOT_URLCONF = 'backend.urls'
 
 TEMPLATES = [

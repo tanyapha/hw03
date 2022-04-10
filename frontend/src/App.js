@@ -30,10 +30,11 @@ class App extends React.Component {
   //gets the data from the backend
   refreshList = () => {
     axios
-      .get("http://localhost:8000/api/rating/")
+      .get("http://localhost:8000/api/rating/get_average/")
       .then((res) => {
         {
           this.setState({ songList: res.data });
+          console.log(res.data);
         }
       })
       .catch((err) => console.log(err));
@@ -59,19 +60,44 @@ class App extends React.Component {
   // what to do when we add information
   handleSubmit = (item) => {
     // for updating ratings
-    if (item.id) {
+    if (this.state.editing) {
+      //check to see if there is already a rating
       axios
-        .put(`http://localhost:8000/api/rating/${item.id}/`, item)
+        .get("http://localhost:8000/api/rating/", {
+          params: { username: "tanya", song: item.song },
+        })
         .then((res) => {
-          console.log("yay, its been updated 😍!!!");
-          this.refreshList();
+          console.log(res.data[0]);
+          // if there is a rating -> update
+          if (res.data.length === 0) {
+            const addRating = { ...item, username: "tanya" };
+            console.log(addRating);
+            axios
+              .post("http://localhost:8000/api/rating/", addRating)
+              .then((res) => {
+                console.log("yay, your rating has been added!!!");
+                this.refreshList();
+              });
+            // else we create a new rating for the user
+          } else {
+            const updateRating = { ...res.data[0], rating: item.rating };
+            axios
+              .put(
+                `http://localhost:8000/api/rating/${updateRating.id}/`,
+                updateRating
+              )
+              .then((res) => {
+                console.log("yay, its been updated 😍!!!");
+                this.refreshList();
+              });
+          }
         });
       return;
     }
     // If the item does not yet exist, use a POST request to write to the
     // database.
     axios.post("http://localhost:8000/api/rating/", item).then((res) => {
-      console.log("yay, its been added!!!");
+      console.log("yay, songs been added !!!");
       this.refreshList();
     });
   };
@@ -106,6 +132,7 @@ class App extends React.Component {
   };
 
   render = () => {
+    console.log(this.state.editing);
     return (
       <div>
         {this.state.formShow ? (
