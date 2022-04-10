@@ -138,27 +138,25 @@ class App extends React.Component {
       <div>
         <p className="title">Song Rator</p>
         <div className="body">
-          <div className="songList">
-            {this.renderList()}
-          </div>
-
+          <button
+            onClick={this.createItem}
+            className="btn btn-primary"
+            disabled={this.state.formShow}
+          >
+            New song
+          </button>
+          <div className="songList">{this.renderList()}</div>
           <div className="form">
-          {this.state.formShow ? (
-            <SongForm
-              currentItem={this.state.currentItem}
-              onSave={this.handleSubmit}
-              closeForm={this.closeForm}
-              editing={this.state.editing}
-            />
-          ) : null}
+            {this.state.formShow ? (
+              <SongForm
+                currentItem={this.state.currentItem}
+                onSave={this.handleSubmit}
+                closeForm={this.closeForm}
+                editing={this.state.editing}
+              />
+            ) : null}
           </div>
         </div>
-
-        <button
-          onClick={this.createItem}
-          className="btn btn-primary"
-          disabled={this.state.formShow}
-        >New song</button>
       </div>
     );
   };

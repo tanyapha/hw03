@@ -1,12 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap");
 
 * {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
-  background-color: #262626;
+  background-color: #faf9f6;
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-  color: white;
+  color: #444444;
 }
 
 .title {
@@ -35,7 +35,7 @@
   font-size: 20px;
 }
 
-.btn{
+.btn {
   margin-bottom: 30px;
   margin-right: 5px;
 }
@@ -43,7 +43,9 @@
 .songList {
   /* display: inline-block; */
   float: left;
-  width: 50vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 .form {
   /* display: inline-block; */
