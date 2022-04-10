@@ -35,7 +35,7 @@ class App extends React.Component {
       .then((res) => {
         {
           this.setState({ songList: res.data });
-          console.log(res.data);
+          console.log(1);
         }
       })
       .catch((err) => console.log(err));
@@ -68,11 +68,9 @@ class App extends React.Component {
           params: { username: "tanya", song: item.song },
         })
         .then((res) => {
-          console.log(res.data[0]);
           // if there is a rating -> update
           if (res.data.length === 0) {
             const addRating = { ...item, username: "tanya" };
-            console.log(addRating);
             axios
               .post("http://localhost:8000/api/rating/", addRating)
               .then((res) => {
@@ -104,10 +102,20 @@ class App extends React.Component {
   };
 
   handleDelete = (item) => {
-    axios.delete(`http://localhost:8000/api/rating/${item.id}`).then((res) => {
-      console.log("DELETED 👋🏼 !!!");
-      this.refreshList();
-    });
+    axios
+      .get("http://localhost:8000/api/rating/", {
+        params: { song: item.song },
+      })
+      .then((res) => {
+        res.data.map((el) => {
+          axios
+            .delete(`http://localhost:8000/api/rating/${el.id}`)
+            .then((res) => {
+              console.log("DELETED 👋🏼 !!!");
+              this.refreshList();
+            });
+        });
+      });
   };
 
   createItem = () => {
@@ -133,7 +141,6 @@ class App extends React.Component {
   };
 
   render = () => {
-    console.log(this.state.editing);
     return (
       <div>
         <p className="title">Song Rator</p>
