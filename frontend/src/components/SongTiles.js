@@ -1,5 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
+import "../style.css";
 
 export default class SongTiles extends React.Component {
   constructor(props) {
@@ -10,9 +11,9 @@ export default class SongTiles extends React.Component {
     const { editItem, onDelete } = this.props;
     return (
       <div>
-        <h1 className="song-name">{this.props.songItem.song}</h1>
-        <p>{this.props.songItem.artist}</p>
-        <p>{this.props.songItem.rating}</p>
+        <p className="song-name">{this.props.songItem.song}</p>
+        <p className="artist-name">{this.props.songItem.artist}</p>
+        <p className="rating">{this.props.songItem.rating}</p>
         <span>
           <button
             onClick={() => editItem(this.props.songItem)}
