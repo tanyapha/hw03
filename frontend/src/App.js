@@ -145,13 +145,15 @@ class App extends React.Component {
       <div>
         <p className="title">Song Rator</p>
         <div className="body">
-          <button
-            onClick={this.createItem}
-            className="btn btn-primary"
-            disabled={this.state.formShow}
-          >
-            New song
-          </button>
+          <div className="div-center-items">
+            <button
+              onClick={this.createItem}
+              className="btn btn-primary"
+              disabled={this.state.formShow}
+            >
+              New song
+            </button>
+          </div>
           <div className="songList">{this.renderList()}</div>
           <div className="form">
             {this.state.formShow ? (
