@@ -15,13 +15,23 @@ Activate your virtual environment with (leave out `.fish` if you are using the d
 source venv/bin/activate.fish
 ```
 
-## 2. Install Django dependencies
+## 2. Install Dependencies
+
+### 2.1 Django
 ```shell
 python3 -m pip install Django
 python3 -m pip install djangorestframework
 python3 -m pip install django-cors-headers
 python3 -m pip install django-filter
 python3 -m pip intsall django-rest-knox
+```
+
+### 2.2 React
+
+```shell
+npm i --save @fortawesome/fontawesome-svg-core
+npm install --save @fortawesome/free-solid-svg-icons
+npm install --save @fortawesome/react-fontawesome
 ```
 
 ## 3. Run the app
