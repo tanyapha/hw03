@@ -54,7 +54,16 @@
   width: 80vh;
 }
 
-.div-center-items {
+.div-center-align {
   display: flex;
   justify-content: center;
+}
+
+.div-right-align {
+  display: flex;
+  justify-content: right;
+}
+
+.modal-edits {
+  padding: 5px 10px;
 }

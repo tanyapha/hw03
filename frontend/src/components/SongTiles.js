@@ -23,7 +23,7 @@ export default class SongTiles extends React.Component {
           <CardText className="rating text-center">
             {this.props.songItem.rating}
           </CardText>
-          <span className="div-center-items">
+          <span className="div-center-align">
             <button
               onClick={() => editItem(this.props.songItem)}
               className="btn btn-secondary"
