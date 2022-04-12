@@ -1,11 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&family=Varela+Round&display=swap");
 
 * {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
-  background-color: #faf9f6;
-  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  /* font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; */
+  font-family: "Fredoka One", cursive;
   color: #444444;
 }
 
@@ -51,4 +52,9 @@
   /* display: inline-block; */
   float: left;
   width: 80vh;
+}
+
+.div-center-items {
+  display: flex;
+  justify-content: center;
 }
