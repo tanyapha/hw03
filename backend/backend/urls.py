@@ -19,10 +19,11 @@ from rest_framework import routers
 from songrater import views
 
 router = routers.DefaultRouter()
-router.register(r'user', views.UserView)
+#router.register(r'user', views.UserView)
 router.register(r'rating', views.RatingView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls))
+    path('api/', include(router.urls)),
+    path('',include('accounts.urls'))
 ]
