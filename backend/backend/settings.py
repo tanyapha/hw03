@@ -40,9 +40,18 @@ INSTALLED_APPS = [
     'songrater',
     'corsheaders',
     'rest_framework',
-    'django_filters'
+    'django_filters',
+    'accounts',
+    'knox'
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES':
+    ('knox.auth.TokenAuthentication',)
+}
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+)
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',

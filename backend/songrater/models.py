@@ -17,4 +17,3 @@ class Rating(models.Model):
     song = models.CharField(max_length = 255)
     artist = models.CharField(max_length = 255)
     rating = models.IntegerField()
-
