@@ -20,6 +20,7 @@ source venv/bin/activate.fish
 python3 -m pip install Django
 python3 -m pip install djangorestframework
 python3 -m pip install django-cors-headers
+python3 -m pip install django-filter
 python3 -m pip intsall django-rest-knox
 ```
 
