@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'songrater',
     'corsheaders',
     'rest_framework',
-    'django_filters'
+    'django_filters',
     'accounts',
     'knox'
 ]
