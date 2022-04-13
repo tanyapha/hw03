@@ -12,7 +12,7 @@ export default class SongTiles extends React.Component {
   render = () => {
     const { editItem, onDelete } = this.props;
     return (
-      <Card className="card">
+      <Card className="card rounded border">
         <CardBody className="card-body">
           <CardTitle className="song-name text-center">
             {this.props.songItem.song}
@@ -23,7 +23,7 @@ export default class SongTiles extends React.Component {
           <CardText className="rating text-center">
             {this.props.songItem.rating}
           </CardText>
-          <span>
+          <span className="div-center-align">
             <button
               onClick={() => editItem(this.props.songItem)}
               className="btn btn-secondary"
