@@ -1,10 +1,9 @@
-import logo from "./logo.svg";
 import React from "react";
-import "./Dashboard.css";
 import "./style.css";
 import SongForm from "./components/SongForm";
 import axios from "axios";
 import SongTiles from "./components/SongTiles";
+import { Modal, ModalBody } from "reactstrap";
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -12,7 +11,7 @@ class Dashboard extends React.Component {
 
     this.state = {
       currentItem: {
-        username: "tanya",
+        username: "",
         song: "",
         artist: "",
         rating: 0,
@@ -34,7 +33,7 @@ class Dashboard extends React.Component {
       .get("http://localhost:8000/api/rating/get_average/")
       .then((res) => {
         {
-          this.setState({ songList: res.data });
+          this.setState({ songList: res.data, formShow: false });
           console.log(1);
         }
       })
@@ -65,12 +64,15 @@ class Dashboard extends React.Component {
       //check to see if there is already a rating
       axios
         .get("http://localhost:8000/api/rating/", {
-          params: { username: "tanya", song: item.song },
+          params: { username: localStorage.getItem("user"), song: item.song },
         })
         .then((res) => {
           // if there is a rating -> update
           if (res.data.length === 0) {
-            const addRating = { ...item, username: "tanya" };
+            const addRating = {
+              ...item,
+              username: localStorage.getItem("user"),
+            };
             axios
               .post("http://localhost:8000/api/rating/", addRating)
               .then((res) => {
@@ -91,6 +93,7 @@ class Dashboard extends React.Component {
               });
           }
         });
+
       return;
     }
     // If the item does not yet exist, use a POST request to write to the
@@ -120,7 +123,7 @@ class Dashboard extends React.Component {
 
   createItem = () => {
     const item = {
-      username: "tanya",
+      username: localStorage.getItem("user"),
       song: "",
       artist: "",
       rating: undefined,
@@ -141,19 +144,40 @@ class Dashboard extends React.Component {
   };
 
   render = () => {
+    console.log(localStorage.getItem("user"));
     return (
       <div>
-        <p className="title">Song Rator</p>
+        <header className="user-display">
+          <div className="div-right-align">
+            Hi,{" "}
+            {localStorage.getItem("user").charAt(0).toUpperCase() +
+              localStorage.getItem("user").slice(1)}
+            !
+          </div>
+        </header>
+        <Modal isOpen={this.state.formShow}>
+          <ModalBody className="modal-edits">
+            <SongForm
+              currentItem={this.state.currentItem}
+              onSave={this.handleSubmit}
+              closeForm={this.closeForm}
+              editing={this.state.editing}
+            />
+          </ModalBody>
+        </Modal>
+        <p className="title">Song Rater</p>
         <div className="body">
-          <button
-            onClick={this.createItem}
-            className="btn btn-primary"
-            disabled={this.state.formShow}
-          >
-            New song
-          </button>
+          <div className="div-center-align">
+            <button
+              onClick={this.createItem}
+              className="btn btn-primary"
+              disabled={this.state.formShow}
+            >
+              New song
+            </button>
+          </div>
           <div className="songList">{this.renderList()}</div>
-          <div className="form">
+          {/* <div className="form">
             {this.state.formShow ? (
               <SongForm
                 currentItem={this.state.currentItem}
@@ -162,7 +186,7 @@ class Dashboard extends React.Component {
                 editing={this.state.editing}
               />
             ) : null}
-          </div>
+          </div> */}
         </div>
       </div>
     );

@@ -11,9 +11,9 @@ function App() {
   }
   return (
     <div className="wrapper">
-      <h1> Song Rater App </h1>
       <BrowserRouter>
         <Routes>
+          {/* <Route path="/" element={<Dashboard />} /> */}
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/login" element={<Login />} />
         </Routes>
