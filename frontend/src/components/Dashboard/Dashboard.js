@@ -3,7 +3,7 @@ import "./style.css";
 import SongForm from "./components/SongForm";
 import axios from "axios";
 import SongTiles from "./components/SongTiles";
-import { Modal, ModalBody } from "reactstrap";
+import { Form, Modal, ModalBody, FormGroup, Input, Label } from "reactstrap";
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -19,6 +19,7 @@ class Dashboard extends React.Component {
       songList: [],
       formShow: false,
       editing: false,
+      allSongs: true,
     };
   }
 
@@ -27,17 +28,37 @@ class Dashboard extends React.Component {
     this.refreshList();
   }
 
-  //gets the data from the backend
-  refreshList = () => {
+  getAllSongs() {
     axios
       .get("http://localhost:8000/api/rating/get_average/")
       .then((res) => {
         {
           this.setState({ songList: res.data, formShow: false });
-          console.log(1);
         }
       })
       .catch((err) => console.log(err));
+  }
+
+  getUserSongs() {
+    axios
+      .get("http://localhost:8000/api/rating/", {
+        params: { username: localStorage.getItem("user") },
+      })
+      .then((res) => {
+        {
+          this.setState({ songList: res.data, formShow: false });
+        }
+      })
+      .catch((err) => console.log(err));
+  }
+
+  //gets the data from the backend
+  refreshList = () => {
+    if (this.state.allSongs) {
+      this.getAllSongs();
+    } else {
+      this.getUserSongs();
+    }
   };
 
   //displaying the songlist on the web using the SongTiles
@@ -121,6 +142,12 @@ class Dashboard extends React.Component {
       });
   };
 
+  handleToggle = () => {
+    this.setState({ allSongs: !this.state.allSongs }, () => {
+      this.refreshList();
+    });
+  };
+
   createItem = () => {
     const item = {
       username: localStorage.getItem("user"),
@@ -144,15 +171,29 @@ class Dashboard extends React.Component {
   };
 
   render = () => {
-    console.log(localStorage.getItem("user"));
     return (
       <div>
         <header className="user-display">
-          <div className="div-right-align">
-            Hi,{" "}
-            {localStorage.getItem("user").charAt(0).toUpperCase() +
-              localStorage.getItem("user").slice(1)}
-            !
+          <div>
+            <span className="div-right-align">
+              Hi,{" "}
+              {localStorage.getItem("user").charAt(0).toUpperCase() +
+                localStorage.getItem("user").slice(1)}
+              !
+            </span>
+            <span class="form-check form-switch div-right-align">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                role="switch"
+                id="flexSwitchCheckChecked"
+                onChange={this.handleToggle}
+                checked={this.state.allSongs}
+              />
+              <label class="form-check-label" for="flexSwitchCheckChecked">
+                {this.state.allSongs ? "All Rated Songs" : "User Rated Songs"}
+              </label>
+            </span>
           </div>
         </header>
         <Modal isOpen={this.state.formShow} centered>

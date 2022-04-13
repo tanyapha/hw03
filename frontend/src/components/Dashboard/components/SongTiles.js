@@ -37,7 +37,7 @@ export default class SongTiles extends React.Component {
             {this.props.songItem.song}
           </CardTitle>
           <CardSubtitle className="artist-name text-center">
-            <i class="bi bi-person-fill songtile-icons"></i>
+            <i className="bi bi-person-fill songtile-icons"></i>
             {this.props.songItem.artist}
           </CardSubtitle>
           <CardText className="rating text-center">
