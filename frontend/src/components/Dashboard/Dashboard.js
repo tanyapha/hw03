@@ -1,12 +1,12 @@
 import logo from "./logo.svg";
-import React from 'react';
+import React from "react";
 import "./Dashboard.css";
 import "./style.css";
 import SongForm from "./components/SongForm";
 import axios from "axios";
 import SongTiles from "./components/SongTiles";
 
-class App extends React.Component {
+class Dashboard extends React.Component {
   constructor(props) {
     super(props);
 
@@ -169,4 +169,4 @@ class App extends React.Component {
   };
 }
 
-export default App;
+export default Dashboard;
