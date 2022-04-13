@@ -9,6 +9,25 @@ export default class SongTiles extends React.Component {
     super(props);
   }
 
+  ratingRound() {
+    return Math.round(this.props.songItem.rating * 2) / 2;
+  }
+
+  starGenerator() {
+    let stars = this.ratingRound();
+    let starDisplay = [];
+    while (stars > 0) {
+      if (stars === 0.5) {
+        starDisplay.push(<i key={stars} className="bi bi-star-half star"></i>);
+        stars -= 0.5;
+      } else {
+        starDisplay.push(<i key={stars} className="bi bi-star-fill star"></i>);
+        stars -= 1;
+      }
+    }
+    return starDisplay;
+  }
+
   render = () => {
     const { editItem, onDelete } = this.props;
     return (
@@ -21,8 +40,8 @@ export default class SongTiles extends React.Component {
             {this.props.songItem.artist}
           </CardSubtitle>
           <CardText className="rating text-center">
-            <i className="bi bi-star"></i>
-            {this.props.songItem.rating}
+            <span className="stars">{this.starGenerator()}</span>(
+            {this.ratingRound()})
           </CardText>
           <span className="div-center-align">
             <button

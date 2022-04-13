@@ -32,8 +32,18 @@
   word-break: break-all;
 }
 
+/* RATING */
+
 .rating {
   font-size: 20px;
+}
+
+.star {
+  margin: 0px 1px;
+  color: #ffd54f;
+}
+.stars {
+  margin-right: 5px;
 }
 
 .btn {
@@ -54,6 +64,8 @@
   width: 80vh;
 }
 
+/* aligning things */
+
 .div-center-align {
   display: flex;
   justify-content: center;
@@ -64,10 +76,13 @@
   justify-content: right;
 }
 
+/* MODAL/ ADD SONG POP UP */
+
 .modal-edits {
   padding: 5px 10px;
 }
 
+/* headings with name */
 .user-display {
   padding-right: 20px;
   padding-top: 10px;
