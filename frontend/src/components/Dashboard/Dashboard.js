@@ -165,7 +165,10 @@ class Dashboard extends React.Component {
             />
           </ModalBody>
         </Modal>
-        <p className="title">Song Rater</p>
+        <h1 className="title">
+          {" "}
+          <i className="bi bi-music-note-list"></i> Song Rater
+        </h1>
         <div className="body">
           <div className="div-center-align">
             <button
