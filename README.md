@@ -29,10 +29,9 @@ python3 -m pip install django-rest-knox
 ### 2.2 React
 
 ```shell
-npm i --save @fortawesome/fontawesome-svg-core
-npm install --save @fortawesome/free-solid-svg-icons
-npm install --save @fortawesome/react-fontawesome
-npm install --save react-router-dom@6
+npm install react-router-dom@6
+npm install --save-dev @babel/preset-react
+npm install bootstrap-icons
 ```
 
 ## 3. Run the app
