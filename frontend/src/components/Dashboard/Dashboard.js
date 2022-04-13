@@ -155,7 +155,7 @@ class Dashboard extends React.Component {
             !
           </div>
         </header>
-        <Modal isOpen={this.state.formShow}>
+        <Modal isOpen={this.state.formShow} centered>
           <ModalBody className="modal-edits">
             <SongForm
               currentItem={this.state.currentItem}
