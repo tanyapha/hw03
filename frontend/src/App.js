@@ -5,6 +5,7 @@ import "./style.css";
 import SongForm from "./components/SongForm";
 import axios from "axios";
 import SongTiles from "./components/SongTiles";
+import { Modal, ModalBody } from "reactstrap";
 
 class App extends React.Component {
   constructor(props) {
@@ -12,7 +13,7 @@ class App extends React.Component {
 
     this.state = {
       currentItem: {
-        username: "tanya",
+        username: "",
         song: "",
         artist: "",
         rating: 0,
@@ -34,7 +35,7 @@ class App extends React.Component {
       .get("http://localhost:8000/api/rating/get_average/")
       .then((res) => {
         {
-          this.setState({ songList: res.data });
+          this.setState({ songList: res.data, formShow: false });
           console.log(1);
         }
       })
@@ -91,6 +92,7 @@ class App extends React.Component {
               });
           }
         });
+
       return;
     }
     // If the item does not yet exist, use a POST request to write to the
@@ -143,9 +145,19 @@ class App extends React.Component {
   render = () => {
     return (
       <div>
+        <Modal isOpen={this.state.formShow}>
+          <ModalBody className="modal-edits">
+            <SongForm
+              currentItem={this.state.currentItem}
+              onSave={this.handleSubmit}
+              closeForm={this.closeForm}
+              editing={this.state.editing}
+            />
+          </ModalBody>
+        </Modal>
         <p className="title">Song Rator</p>
         <div className="body">
-          <div className="div-center-items">
+          <div className="div-center-align">
             <button
               onClick={this.createItem}
               className="btn btn-primary"
@@ -155,7 +167,7 @@ class App extends React.Component {
             </button>
           </div>
           <div className="songList">{this.renderList()}</div>
-          <div className="form">
+          {/* <div className="form">
             {this.state.formShow ? (
               <SongForm
                 currentItem={this.state.currentItem}
@@ -164,7 +176,7 @@ class App extends React.Component {
                 editing={this.state.editing}
               />
             ) : null}
-          </div>
+          </div> */}
         </div>
       </div>
     );

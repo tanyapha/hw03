@@ -42,12 +42,14 @@ export default class SongForm extends React.Component {
     const { onSave, closeForm } = this.props;
     return (
       <div>
-        <button
-          type="button"
-          className="btn-close"
-          aria-label="Close"
-          onClick={() => closeForm()}
-        ></button>
+        <div className="div-right-align">
+          <button
+            type="button"
+            className="btn-close"
+            aria-label="Close"
+            onClick={() => closeForm()}
+          ></button>
+        </div>
         <Form>
           <FormGroup>
             <Label for="song">Song Name</Label>
@@ -88,19 +90,21 @@ export default class SongForm extends React.Component {
             <FormFeedback> ❌ Your rating should be between 0-5</FormFeedback>
           </FormGroup>
         </Form>
-        <Button
-          color="success"
-          onClick={() => onSave(this.state.currentItem)}
-          disabled={
-            this.state.currentItem.song === "" ||
-            this.state.currentItem.artist === "" ||
-            !this.state.validRating
-              ? true
-              : false
-          }
-        >
-          Save
-        </Button>
+        <div className="div-right-align">
+          <Button
+            color="success"
+            onClick={() => onSave(this.state.currentItem)}
+            disabled={
+              this.state.currentItem.song === "" ||
+              this.state.currentItem.artist === "" ||
+              !this.state.validRating
+                ? true
+                : false
+            }
+          >
+            Save
+          </Button>
+        </div>
       </div>
     );
   }
