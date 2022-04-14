@@ -11,7 +11,7 @@ export default function Register({setToken}) {
   const [data, setData] = useState({username: "", password: ""});
 
   function routeChange() {
-    let path = "/";
+    let path = "/login";
     navigate(path);
   }
 

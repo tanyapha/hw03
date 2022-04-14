@@ -1,35 +1,50 @@
 import React, { useState } from "react";
 //import { render } from 'react-dom';
 import { Button, Form, FormGroup } from "reactstrap";
+import { useNavigate } from 'react-router-dom';
 import "./Login.css";
-//import axios from "axios";
-import PropTypes from "prop-types";
+import axios from "axios";
 
-async function loginUser(credentials) {
-  return fetch("http://127.0.0.1:8000/api/auth/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(credentials),
-  }).then((data) => data.json());
-}
+export default function Login() {
+  let navigate = useNavigate();
+  const url = "http://127.0.0.1:8000/api/auth/login";
+  const [data, setData] = useState({username: "", password: ""});
 
-export default function Login({ setToken }) {
-  const [username, setUserName] = useState();
-  const [password, setPassword] = useState();
+  function routeChange() {
+    let path = "/register";
+    navigate(path);
+  } 
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const token = await loginUser({
-      username,
-      password,
-    });
-    setToken(token);
-    localStorage.setItem("user", username);
+  // helper function 1
+  function handleChange(e) {
+    const newdata = {...data}
+    newdata[e.target.id] = e.target.value
+    setData(newdata)
+    console.log(newdata)
   };
 
-  return (
+   // helper function 2
+   function handleSubmit(e) {
+    e.preventDefault();
+    axios({
+      method: "post",
+      url: "http://127.0.0.1:8000/api/auth/login",
+      data:{
+        username: data.username,
+        password: data.password  },
+      headers: {"Content-Type": "application/json"}
+    }).then(res =>{
+        console.log(res);
+        window.localStorage.setItem("token",res.data.token)
+        alert("Successfully logged in!");
+        navigate("/Dashboard");
+    }).catch(err => {
+      console.log(err);
+      alert("Incorrect credentials.");
+    });
+  }
+
+  return(
     <div className="login-wrapper">
       <body className="login-content">
         <h1 id="login-title"> Please Log In </h1>
@@ -37,30 +52,31 @@ export default function Login({ setToken }) {
           <FormGroup>
             <label>
               <p>Username</p>
-              <input
-                type="text"
-                onChange={(e) => setUserName(e.target.value)}
+              <input type="text" id="username" value={data.username} placeholder="Enter Username" onChange={(e) => handleChange(e)}
               />
             </label>
           </FormGroup>
           <FormGroup>
             <label>
               <p>Password</p>
-              <input
-                type="password"
-                onChange={(e) => setPassword(e.target.value)}
-              />
+              <input type="password" id="password" value={data.password} placeholder="Enter Password" onChange={(e) => handleChange(e)}/>
             </label>
           </FormGroup>
           <div className="div-center-align">
-            <Button type="Submit">Submit</Button>
+            <Button type="submit" disabled={data.username === "" || data.password === ""}> Submit </Button>
           </div>
         </Form>
+        <div className="div-center-align">
+          <div>Don't have an account?</div>
+          <button onClick={routeChange}> Register here </button>
+        </div>
       </body>
     </div>
-  );
+    ); 
 }
 
-Login.propTypes = {
-  setToken: PropTypes.func.isRequired,
-};
+
+
+// Login.propTypes = {
+//   setToken: PropTypes.func.isRequired,
+// };
