@@ -1,0 +1,26 @@
+.register-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.register-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.div-center-align {
+  display: flex;
+  justify-content: center;
+}
+
+.div-right-align {
+  display: flex;
+  justify-content: right;
+}
+
+#register-title {
+  margin-bottom: 25px;
+}
