@@ -7,7 +7,7 @@ import axios from "axios";
 export default function Login() {
   let navigate = useNavigate();
   const [data, setData] = useState({username: "", password: ""});
-
+  var [errorShow, setErrorShow] = useState(false);
   function routeChange() {
     let path = "/register";
     navigate(path);
@@ -38,7 +38,7 @@ export default function Login() {
         navigate("/Dashboard");
     }).catch(err => {
       console.log(err);
-      alert("Incorrect credentials.");
+      setErrorShow(true);
     });
   }
 
@@ -60,6 +60,11 @@ export default function Login() {
               <input type="password" id="password" value={data.password} placeholder="Enter Password" onChange={(e) => handleChange(e)}/>
             </label>
           </FormGroup>
+          <div>
+            {errorShow ? (
+              <div className="message">Incorrect credentials. Please try with a different username or password.</div>
+            ) : null}
+          </div>
           <div className="div-center-align">
             <Button type="submit" disabled={data.username === "" || data.password === ""}> Submit </Button>
           </div>
