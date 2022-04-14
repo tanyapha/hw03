@@ -10,6 +10,11 @@ export default function Register({setToken}) {
   const url = "http://127.0.0.1:8000/api/auth/register";
   const [data, setData] = useState({username: "", password: ""});
 
+  function routeChange() {
+    let path = "/";
+    navigate(path);
+  }
+
   // helper function 1
   function handleChange(e) {
     const newdata = {...data}
@@ -38,6 +43,7 @@ export default function Register({setToken}) {
     });
   }
 
+
   // return
   return(
     <div className="register-wrapper">
@@ -61,6 +67,10 @@ export default function Register({setToken}) {
             <Button type="submit" disabled={data.username === "" || data.password === ""}> Register </Button>
           </div>
         </Form>
+        <div className="div-center-align">
+          <div>You have an account?</div>
+          <button onClick={routeChange}> Log in here </button>
+        </div>
       </body>
     </div>
       );
