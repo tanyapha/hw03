@@ -21,7 +21,7 @@
   justify-content: right;
 }
 
-.error {
+.message {
   color: red;
   margin-bottom: 10px;
 }

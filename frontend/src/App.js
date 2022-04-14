@@ -5,18 +5,18 @@ import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 
 function App() {
-  const [token, setToken] = useState();
-
-  if (!token) {
-    return <Login setToken={setToken} />;
-  }
+  // const [token, setToken] = useState();
+  //
+  // if (!token) {
+  //   return <Login setToken={setToken} />;
+  // }
   return (
     <div className="wrapper">
       <BrowserRouter>
         <Routes>
           {/* <Route path="/" element={<Dashboard />} /> */}
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>
       </BrowserRouter>

@@ -4,16 +4,16 @@ import { Button, Form, FormGroup } from "reactstrap";
 import "./Register.css";
 import axios from "axios";
 import PropTypes from "prop-types";
-import { Modal, ModalBody } from "reactstrap";
 
 export default function Register() {
   let navigate = useNavigate();
   const url = "http://127.0.0.1:8000/api/auth/register";
   const [data, setData] = useState({username: "", password: ""});
   var [errorShow, setErrorShow] = useState(false);
+  var [successShow, setSuccessShow] = useState(false);
 
   function routeChange() {
-    let path = "/login";
+    let path = "/";
     navigate(path);
   }
 
@@ -37,13 +37,12 @@ export default function Register() {
       headers: {"Content-Type": "application/json"}
     }).then(res =>{
         console.log(res.data);
-        alert("Successfully registered!");
-        navigate("/login");
+        setErrorShow(true);
+        // alert("Successfully registered!");
+        navigate("/");
     }).catch(err => {
       console.log(err);
       setErrorShow(true);
-      // alert("This username is already used.");
-      // alert(errorShow);
     });
   }
 
@@ -69,10 +68,9 @@ export default function Register() {
           </FormGroup>
           <div>
             {errorShow ? (
-              <div className="error">This username is already used.</div>
+              <div className="message">This username is already used.</div>
             ) : null}
           </div>
-
           <div className="div-center-align">
             <Button type="submit" disabled={data.username === "" || data.password === ""}> Register </Button>
           </div>
