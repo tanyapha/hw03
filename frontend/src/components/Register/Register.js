@@ -3,16 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Form, FormGroup } from "reactstrap";
 import "./Register.css";
 import axios from "axios";
-import PropTypes from "prop-types";
 
-export default function Register({setToken}) {
+export default function Register() {
   let navigate = useNavigate();
-  const url = "http://127.0.0.1:8000/api/auth/register";
   const [data, setData] = useState({username: "", password: ""});
   var [errorShow, setErrorShow] = useState(false);
 
   function routeChange() {
-    let path = "/";
+    let path = "/login";
     navigate(path);
   }
 
@@ -37,7 +35,7 @@ export default function Register({setToken}) {
     }).then(res =>{
         console.log(res.data);
         alert("Successfully registered!");
-        navigate("/");
+        navigate("/login");
     }).catch(err => {
       console.log(err);
       setErrorShow(true);
