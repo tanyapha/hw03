@@ -1,7 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import "../style.css";
-import "../components/songtiles.css";
 import { Card, CardBody, CardTitle, CardSubtitle, CardText } from "reactstrap";
 
 export default class SongTiles extends React.Component {
@@ -35,8 +34,26 @@ export default class SongTiles extends React.Component {
   render = () => {
     const { editItem, rateItem, onDelete } = this.props;
     return (
-      <Card className="card rounded border">
+      <Card className="card rounded">
         <CardBody className="card-body">
+          <span className="div-right-align">
+            <button
+              onClick={() => editItem(this.props.songItem)}
+              className="btn btn-secondary btn-sm"
+              disabled={this.props.formShow}
+            >
+              {" "}
+              Edit{" "}
+            </button>
+            <button
+              onClick={() => onDelete(this.props.songItem)}
+              className="btn btn-danger btn-sm"
+              disabled={this.props.formShow}
+            >
+              {" "}
+              Delete{" "}
+            </button>
+          </span>
           <CardTitle className="song-name text-center">
             {this.props.songItem.song}
           </CardTitle>
@@ -48,32 +65,14 @@ export default class SongTiles extends React.Component {
             <span className="songtile-icons">{this.starGenerator()}</span>(
             {this.ratingRound()})
           </CardText>
-          <span className="div-center-align">
-            <button
-              onClick={() => editItem(this.props.songItem)}
-              className="btn btn-secondary"
-              disabled={this.props.formShow}
-            >
-              {" "}
-              Edit{" "}
-            </button>
-            <button
-              onClick={() => rateItem(this.props.songItem)}
-              className="btn btn-secondary"
-              disabled={this.props.formShow}
-            >
-              {" "}
-              Rate{" "}
-            </button>
-            <button
-              onClick={() => onDelete(this.props.songItem)}
-              className="btn btn-danger"
-              disabled={this.props.formShow}
-            >
-              {" "}
-              Delete{" "}
-            </button>
-          </span>
+          <button
+            onClick={() => rateItem(this.props.songItem)}
+            className="btn btn-success rate-button"
+            disabled={this.props.formShow}
+          >
+            {" "}
+            Rate{" "}
+          </button>
         </CardBody>
       </Card>
     );
