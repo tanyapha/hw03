@@ -22,8 +22,16 @@
 }
 
 .message {
+  display: flex;
+  justify-content: center;
   color: red;
   margin-bottom: 10px;
+}
+
+.login {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 #register-title {

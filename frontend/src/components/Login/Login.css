@@ -21,6 +21,19 @@
   justify-content: right;
 }
 
+.message {
+  display: flex;
+  justify-content: center;
+  color: red;
+  margin-bottom: 10px;
+}
+
+.register {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
 #login-title {
   margin-bottom: 25px;
 }

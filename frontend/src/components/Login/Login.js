@@ -35,7 +35,7 @@ export default function Login() {
         console.log(res);
         window.localStorage.setItem("token",res.data.token)
         alert("Successfully logged in!");
-        navigate("/Dashboard");
+        navigate("/dashboard");
     }).catch(err => {
       console.log(err);
       setErrorShow(true);
@@ -66,10 +66,10 @@ export default function Login() {
             ) : null}
           </div>
           <div className="div-center-align">
-            <Button type="submit" disabled={data.username === "" || data.password === ""}> Submit </Button>
+            <Button type="submit" disabled={data.username === "" || data.password === ""}> Log in </Button>
           </div>
         </Form>
-        <div className="div-center-align">
+        <div className="register">
           <div>Don't have an account?</div>
           <button onClick={routeChange}> Register here </button>
         </div>

@@ -11,7 +11,7 @@ export default function Register() {
   var [successShow, setSuccessShow] = useState(false);
 
   function routeChange() {
-    let path = "/login";
+    let path = "/";
     navigate(path);
   }
 
@@ -35,9 +35,8 @@ export default function Register() {
       headers: {"Content-Type": "application/json"}
     }).then(res =>{
         console.log(res.data);
-        setErrorShow(true);
-        // alert("Successfully registered!");
-        navigate("/login");
+        alert("Successfully registered!")
+        navigate("/");
     }).catch(err => {
       console.log(err);
       setErrorShow(true);
@@ -73,7 +72,7 @@ export default function Register() {
             <Button type="submit" disabled={data.username === "" || data.password === ""}> Register </Button>
           </div>
         </Form>
-        <div className="div-center-align">
+        <div className="login">
           <div>You already have an account?</div>
           <button onClick={routeChange}> Log in </button>
         </div>
