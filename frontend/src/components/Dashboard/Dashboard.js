@@ -14,7 +14,7 @@ class Dashboard extends React.Component {
         id: "",
         song: "",
         artist: "",
-        rating: null,
+        rating: undefined,
         ratings: [],
       },
       songList: [],
@@ -104,6 +104,28 @@ class Dashboard extends React.Component {
       });
   };
 
+  addSong(item) {
+    axios
+      .post("http://localhost:8000/api/song/", {
+        song: item.song,
+        artist: item.artist,
+      })
+      .then((res) => {
+        console.log("yay, song has been added to song!!!");
+        this.addRating(res.data.id, item.rating);
+      });
+  }
+
+  updateSong(song, artist, id) {
+    const updateSong = { song: song, artist: artist };
+    axios
+      .put(`http://localhost:8000/api/song/${id}/`, updateSong)
+      .then((res) => {
+        console.log("yay, the song has been updated 😍!!!");
+        this.refreshList();
+      });
+  }
+
   // what to do when we add information
   handleSubmit = (item) => {
     console.log(item);
@@ -123,27 +145,12 @@ class Dashboard extends React.Component {
       return;
     }
     if (this.state.currentlyEditing) {
-      console.log(item);
-      const updateSong = { song: item.song, artist: item.artist };
-      axios
-        .put(`http://localhost:8000/api/song/${item.id}/`, updateSong)
-        .then((res) => {
-          console.log("yay, the song has been updated 😍!!!");
-          this.refreshList();
-        });
+      this.updateSong(item.song, item.artist, item.id);
       return;
     }
     // If the item does not yet exist, use a POST request to write to the
     // database.
-    axios
-      .post("http://localhost:8000/api/song/", {
-        song: item.song,
-        artist: item.artist,
-      })
-      .then((res) => {
-        console.log("yay, song has been added to song!!!");
-        this.addRating(res.data.id, item.rating);
-      });
+    this.addSong(item);
   };
 
   handleDelete = (item) => {
@@ -196,7 +203,7 @@ class Dashboard extends React.Component {
 
   render = () => {
     return (
-      <div>
+      <div className="page-container">
         <header className="user-display">
           <div>
             <span className="div-right-align">
@@ -205,16 +212,16 @@ class Dashboard extends React.Component {
                 localStorage.getItem("user").slice(1)}
               !
             </span>
-            <span class="form-check form-switch div-right-align">
+            <span className="form-check form-switch div-right-align">
               <input
-                class="form-check-input"
+                className="form-check-input"
                 type="checkbox"
                 role="switch"
                 id="flexSwitchCheckChecked"
                 onChange={this.handleToggle}
                 checked={this.state.allSongs}
               />
-              <label class="form-check-label" for="flexSwitchCheckChecked">
+              <label className="form-check-label" for="flexSwitchCheckChecked">
                 {this.state.allSongs ? "All Rated Songs" : "User Rated Songs"}
               </label>
             </span>

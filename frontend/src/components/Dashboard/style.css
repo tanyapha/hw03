@@ -10,6 +10,13 @@
   color: #444444;
 }
 
+.page-container {
+  background-image: url(./background.svg);
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-color: #e9f7ef;
+}
+
 .title {
   margin: 20px 0;
   text-align: center;
@@ -21,7 +28,40 @@
   overflow: hidden;
 }
 
-/* SongTiles.js */
+/* BUTTONS */
+
+.btn {
+  margin-bottom: 5px;
+  margin-right: 5px;
+}
+
+.rate-button {
+  width: 100%;
+  background-color: #27ae60 !important;
+  border-color: #27ae60 !important;
+}
+
+/*  Aligning Things */
+
+.div-center-align {
+  display: flex;
+  justify-content: center;
+}
+
+.div-right-align {
+  display: flex;
+  justify-content: right;
+}
+
+/* -------------- SONG DISPLAY TILE ----------- */
+
+.card {
+  width: 400px;
+  margin: 1rem;
+  border: 0px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
 .song-name {
   font-size: 30px;
   word-break: break-all;
@@ -30,6 +70,18 @@
 .artist-name {
   font-size: 20px;
   word-break: break-all;
+}
+
+.songList {
+  /* display: inline-block; */
+  float: left;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.songtile-icons {
+  margin-right: 5px;
 }
 
 /* RATING */
@@ -43,47 +95,13 @@
   color: #ffd54f;
 }
 
-.songtile-icons {
-  margin-right: 5px;
-}
-
-.btn {
-  margin-bottom: 30px;
-  margin-right: 5px;
-}
-
-.songList {
-  /* display: inline-block; */
-  float: left;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-.form {
-  /* display: inline-block; */
-  float: left;
-  width: 80vh;
-}
-
-/* aligning things */
-
-.div-center-align {
-  display: flex;
-  justify-content: center;
-}
-
-.div-right-align {
-  display: flex;
-  justify-content: right;
-}
-
-/* MODAL/ ADD SONG POP UP */
+/*---------- MODAL/ ADD SONG POP UP ------------- */
 
 /* .modal-edits {
   padding: 5px 10px;
 } */
 
-/* headings with name */
+/* ------------- HEADER ----------------------*/
 .user-display {
   padding-right: 20px;
   padding-top: 10px;
