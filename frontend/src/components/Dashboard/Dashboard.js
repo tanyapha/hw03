@@ -10,19 +10,20 @@ class Dashboard extends React.Component {
     super(props);
 
     this.state = {
-      currentItem: {
-        username: "",
+      songItem: {
+        id: "",
         song: "",
         artist: "",
-        rating: 0,
+        rating: null,
+        ratings: [],
       },
       songList: [],
       formShow: false,
-      editing: false,
+      currentlyEditing: false,
+      currentlyRating: false,
       allSongs: true,
     };
   }
-
   //load the list for the first time we enter the site
   componentDidMount() {
     this.refreshList();
@@ -30,35 +31,37 @@ class Dashboard extends React.Component {
 
   getAllSongs() {
     axios
-      .get("http://localhost:8000/api/rating/get_average/")
+      .get("http://localhost:8000/api/song/")
       .then((res) => {
         {
+          console.log(res.data);
           this.setState({ songList: res.data, formShow: false });
         }
       })
       .catch((err) => console.log(err));
   }
 
-  getUserSongs() {
-    axios
-      .get("http://localhost:8000/api/rating/", {
-        params: { username: localStorage.getItem("user") },
-      })
-      .then((res) => {
-        {
-          this.setState({ songList: res.data, formShow: false });
-        }
-      })
-      .catch((err) => console.log(err));
-  }
+  // getUserSongs() {
+  //   axios
+  //     .get("http://localhost:8000/api/rating/", {
+  //       params: { username: localStorage.getItem("user") },
+  //     })
+  //     .then((res) => {
+  //       {
+  //         this.setState({ songList: res.data, formShow: false });
+  //       }
+  //     })
+  //     .catch((err) => console.log(err));
+  // }
 
   //gets the data from the backend
   refreshList = () => {
-    if (this.state.allSongs) {
-      this.getAllSongs();
-    } else {
-      this.getUserSongs();
-    }
+    this.getAllSongs();
+    // if (this.state.allSongs) {
+    //   this.getAllSongs();
+    // } else {
+    //   this.getUserSongs();
+    // }
   };
 
   //displaying the songlist on the web using the SongTiles
@@ -67,6 +70,7 @@ class Dashboard extends React.Component {
       <SongTiles
         key={this.state.songList.indexOf(item)}
         songItem={item}
+        rateItem={this.rateItem}
         editItem={this.editItem}
         formShow={this.state.formShow}
         onDelete={this.handleDelete}
@@ -78,68 +82,76 @@ class Dashboard extends React.Component {
     this.setState({ formShow: false });
   };
 
-  // what to do when we add information
-  handleSubmit = (item) => {
-    // for updating ratings
-    if (this.state.editing) {
-      //check to see if there is already a rating
-      axios
-        .get("http://localhost:8000/api/rating/", {
-          params: { username: localStorage.getItem("user"), song: item.song },
-        })
-        .then((res) => {
-          // if there is a rating -> update
-          if (res.data.length === 0) {
-            const addRating = {
-              ...item,
-              username: localStorage.getItem("user"),
-            };
-            axios
-              .post("http://localhost:8000/api/rating/", addRating)
-              .then((res) => {
-                console.log("yay, your rating has been added!!!");
-                this.refreshList();
-              });
-            // else we create a new rating for the user
-          } else {
-            const updateRating = { ...res.data[0], rating: item.rating };
-            axios
-              .put(
-                `http://localhost:8000/api/rating/${updateRating.id}/`,
-                updateRating
-              )
-              .then((res) => {
-                console.log("yay, its been updated 😍!!!");
-                this.refreshList();
-              });
-          }
-        });
-
-      return;
-    }
-    // If the item does not yet exist, use a POST request to write to the
-    // database.
-    axios.post("http://localhost:8000/api/rating/", item).then((res) => {
-      console.log("yay, songs been added !!!");
+  addRating = (song_id, rating) => {
+    const addRating = {
+      song_id: song_id,
+      username: localStorage.getItem("user"),
+      rating: rating,
+    };
+    axios.post("http://localhost:8000/api/rating/", addRating).then((res) => {
+      console.log("yay, your rating has been added!!!");
       this.refreshList();
     });
   };
 
-  handleDelete = (item) => {
+  updateRating = (song_info, rating) => {
+    const updateRating = { ...song_info, rating: rating };
     axios
-      .get("http://localhost:8000/api/rating/", {
-        params: { song: item.song },
+      .put(`http://localhost:8000/api/rating/${updateRating.id}/`, updateRating)
+      .then((res) => {
+        console.log("yay, its been updated 😍!!!");
+        this.refreshList();
+      });
+  };
+
+  // what to do when we add information
+  handleSubmit = (item) => {
+    console.log(item);
+    if (this.state.currentlyRating) {
+      //check to see if there is already a rating
+      axios
+        .get("http://localhost:8000/api/rating/", {
+          params: { username: localStorage.getItem("user"), song_id: item.id },
+        })
+        .then((res) => {
+          if (res.data.length === 0) {
+            this.addRating(item.song_id, item.rating);
+          } else {
+            this.updateRating(res.data[0], item.rating);
+          }
+        });
+      return;
+    }
+    if (this.state.currentlyEditing) {
+      console.log(item);
+      const updateSong = { song: item.song, artist: item.artist };
+      axios
+        .put(`http://localhost:8000/api/song/${item.id}/`, updateSong)
+        .then((res) => {
+          console.log("yay, the song has been updated 😍!!!");
+          this.refreshList();
+        });
+      return;
+    }
+    // If the item does not yet exist, use a POST request to write to the
+    // database.
+    axios
+      .post("http://localhost:8000/api/song/", {
+        song: item.song,
+        artist: item.artist,
       })
       .then((res) => {
-        res.data.map((el) => {
-          axios
-            .delete(`http://localhost:8000/api/rating/${el.id}`)
-            .then((res) => {
-              console.log("DELETED 👋🏼 !!!");
-              this.refreshList();
-            });
-        });
+        console.log("yay, song has been added to song!!!");
+        this.addRating(res.data.id, item.rating);
       });
+  };
+
+  handleDelete = (item) => {
+    console.log(item);
+    axios.delete(`http://localhost:8000/api/song/${item.id}`).then((res) => {
+      console.log("DELETED 👋🏼 !!!");
+      this.refreshList();
+    });
   };
 
   handleToggle = () => {
@@ -150,23 +162,35 @@ class Dashboard extends React.Component {
 
   createItem = () => {
     const item = {
-      username: localStorage.getItem("user"),
+      id: "",
       song: "",
       artist: "",
+      ratings: [],
       rating: undefined,
     };
     this.setState({
-      currentItem: item,
+      songItem: item,
       formShow: true,
-      editing: false,
+      currentlyEditing: false,
+      currentlyRating: false,
     });
   };
 
   editItem = (item) => {
     this.setState({
-      currentItem: item,
+      songItem: item,
       formShow: true,
-      editing: true,
+      currentlyEditing: true,
+      currentlyRating: false,
+    });
+  };
+
+  rateItem = (item) => {
+    this.setState({
+      songItem: item,
+      formShow: true,
+      currentlyRating: true,
+      currentlyEditing: false,
     });
   };
 
@@ -199,10 +223,11 @@ class Dashboard extends React.Component {
         <Modal isOpen={this.state.formShow} centered>
           <ModalBody className="modal-edits">
             <SongForm
-              currentItem={this.state.currentItem}
+              songItem={this.state.songItem}
               onSave={this.handleSubmit}
               closeForm={this.closeForm}
-              editing={this.state.editing}
+              currentlyEditing={this.state.currentlyEditing}
+              currentlyRating={this.state.currentlyRating}
             />
           </ModalBody>
         </Modal>
@@ -221,16 +246,6 @@ class Dashboard extends React.Component {
             </button>
           </div>
           <div className="songList">{this.renderList()}</div>
-          {/* <div className="form">
-            {this.state.formShow ? (
-              <SongForm
-                currentItem={this.state.currentItem}
-                onSave={this.handleSubmit}
-                closeForm={this.closeForm}
-                editing={this.state.editing}
-              />
-            ) : null}
-          </div> */}
         </div>
       </div>
     );

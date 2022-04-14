@@ -10,7 +10,11 @@ export default class SongTiles extends React.Component {
   }
 
   ratingRound() {
-    return Math.round(this.props.songItem.rating * 2) / 2;
+    let average = 0;
+    for (let val of this.props.songItem.ratings) {
+      average += val;
+    }
+    return Math.round((average / this.props.songItem.ratings.length) * 2) / 2;
   }
 
   starGenerator() {
@@ -29,7 +33,7 @@ export default class SongTiles extends React.Component {
   }
 
   render = () => {
-    const { editItem, onDelete } = this.props;
+    const { editItem, rateItem, onDelete } = this.props;
     return (
       <Card className="card rounded border">
         <CardBody className="card-body">
@@ -52,6 +56,14 @@ export default class SongTiles extends React.Component {
             >
               {" "}
               Edit{" "}
+            </button>
+            <button
+              onClick={() => rateItem(this.props.songItem)}
+              className="btn btn-secondary"
+              disabled={this.props.formShow}
+            >
+              {" "}
+              Rate{" "}
             </button>
             <button
               onClick={() => onDelete(this.props.songItem)}
