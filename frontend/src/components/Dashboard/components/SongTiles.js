@@ -31,6 +31,8 @@ export default class SongTiles extends React.Component {
     return starDisplay;
   }
 
+  checkUpdate() {}
+
   render = () => {
     const { editItem, rateItem, onDelete } = this.props;
     return (
@@ -71,7 +73,11 @@ export default class SongTiles extends React.Component {
             disabled={this.props.formShow}
           >
             {" "}
-            Rate{" "}
+            {this.props.userItem.some(
+              (e) => e.song_id === this.props.songItem.id
+            )
+              ? "Update"
+              : "Rating"}{" "}
           </button>
         </CardBody>
       </Card>

@@ -17,6 +17,7 @@ class Dashboard extends React.Component {
         rating: undefined,
         ratings: [],
       },
+      userItem: [],
       songList: [],
       formShow: false,
       currentlyEditing: false,
@@ -57,6 +58,14 @@ class Dashboard extends React.Component {
   //gets the data from the backend
   refreshList = () => {
     this.getAllSongs();
+    axios
+      .get("http://localhost:8000/api/rating/", {
+        params: { username: localStorage.getItem("user") },
+      })
+      .then((res) => {
+        this.setState({ userItem: res.data });
+        console.log(res.data);
+      });
     // if (this.state.allSongs) {
     //   this.getAllSongs();
     // } else {
@@ -70,6 +79,7 @@ class Dashboard extends React.Component {
       <SongTiles
         key={this.state.songList.indexOf(item)}
         songItem={item}
+        userItem={this.state.userItem}
         rateItem={this.rateItem}
         editItem={this.editItem}
         formShow={this.state.formShow}
@@ -88,7 +98,6 @@ class Dashboard extends React.Component {
       username: localStorage.getItem("user"),
       rating: rating,
     };
-    console.log(addRating);
     axios.post("http://localhost:8000/api/rating/", addRating).then((res) => {
       console.log("yay, your rating has been added!!!");
       this.refreshList();
@@ -129,7 +138,6 @@ class Dashboard extends React.Component {
 
   // what to do when we add information
   handleSubmit = (item) => {
-    console.log(item);
     if (this.state.currentlyRating) {
       //check to see if there is already a rating
       axios
