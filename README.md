@@ -1,4 +1,4 @@
-# hw03
+# HW03
 comp333 hw3
 
 software 333 hw3
@@ -37,28 +37,46 @@ npm install bootstrap-icons
 ## 3. Run the app
 Backend:
 ```shell
-cd backend
+cd hw03-main/backend
 python3 manage.py runserver
 ```
 Frontend:
 ```shell
-cd frontend
+cd hw03-main/frontend
+npm install
 npm start
 ```
 
-## 4. How to use the app
-If you want to add a new song, click "new song" and add.
-If you want to add a rating of a song that someone has already rated, click "Rate" on the song. Now, the button should change to "Update".
-If you want to update your rating, click "Update".
+## 4. Using the Songrater main App
+
+### Register or Login
+In your broswer, go to <http://localhost:3000/>. If you have already created an account you can login in, otherwise click on the "Register Button". After you have registered, you should be redirected to the login page where you can login.
+
+To check the song ratings dashboard, in your browser go to <http://localhost:3000/Dashboard>.
+
+### create new song
+If you want to add a new song, click "new song" and add information.
+
+### update song information
+Click the edit song info and change the artist or the song.
+
+### update your rating
+For songs that you have already rated, the button should say "Update". There you can update your song rating
+
+### add your rating
+If you want to add a rating of a song that someone has already rated, click "Rate" on the song. After, the button should change to "Update".
+
+### delete song
+To delete a song just click on the delete button
 
 ---------------------------------------------------------------------------------------------
 
-If you want to test backend, please check the following.
+If you want JUST WANT to test the backend, please check the following.
 
-## Test APIs using Postman for user authentication
+### Test APIs using Postman for user authentication
 Download desktop client from Postman at <https://www.postman.com/downloads/>.
 
-### Registration:
+#### Registration:
 To send a POST request to <http://127.0.0.1:8000/api/auth/register> via Postman, you can choose Content-Type as `key` and application/json as `value` in the `Headers`. Then in the `body`, select `raw` and include the following:
 ```shell
 {
@@ -68,13 +86,13 @@ To send a POST request to <http://127.0.0.1:8000/api/auth/register> via Postman,
 ```
 And then click on `send`. If successfully registered, you should be able to see a token generated.
 
-### Login:
+#### Login:
 To send a POST request to <http://127.0.0.1:8000/api/auth/login> via Postman, just do the same steps as above (put in the same username and password after you registered successfully). After you get a token, copy that for user authorization.
 
-### User Authorization:
+#### User Authorization:
 Now, send a GET request to <http://127.0.0.1:8000/api/auth/user>, you need to choose Authorization as `key` and paste the token you get from log-in with 'Token ' in front of it as `Value` in the `Headers`. For example: "Token 78d2b3c0edc368eb416c0a76e55a6378df3ddb1721137ca5571d1cd69c3bcc06"
 
-## 5. Using the Songrater main App
-In your broswer, go to <http://localhost:3000/>. You will see a log in page if you have not logged in successfully yet. After you submit a username with password that has already registered, you will be able to see the list of songs' ratings in our database.
-
-To check the song ratings dashboard, in your browser go to <http://localhost:3000/Dashboard>.
+## Contributions
+Tanya: Main CRUD Features (Django + React) + UI
+Tomoshi:
+Jiner: 
