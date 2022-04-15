@@ -93,6 +93,6 @@ To send a POST request to <http://127.0.0.1:8000/api/auth/login> via Postman, ju
 Now, send a GET request to <http://127.0.0.1:8000/api/auth/user>, you need to choose Authorization as `key` and paste the token you get from log-in with 'Token ' in front of it as `Value` in the `Headers`. For example: "Token 78d2b3c0edc368eb416c0a76e55a6378df3ddb1721137ca5571d1cd69c3bcc06"
 
 ## Contributions
-Tanya: Main CRUD Features (Django + React) + UI
-Tomoshi:
-Jiner: 
+Tanya: Main CRUD Features (Django + React) + UI <br>
+Tomoshi: Registration + helped user authentication <br>
+Jiner: User Authentication
