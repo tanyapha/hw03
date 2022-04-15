@@ -49,11 +49,18 @@ export default function Login() {
   return (
     <div className="login-wrapper">
       <body className="login-content">
-        <h1 id="login-title"> Please Log In </h1>
+        <h1 id="login-title">
+          {" "}
+          <i class="bi bi-box-arrow-in-right icon-margin"></i>Log In{" "}
+        </h1>
         <Form onSubmit={handleSubmit}>
           <FormGroup>
             <Label>
-              <p>Username</p>
+              <span className="div-left-align">
+                {" "}
+                <i class="bi bi-person-heart"></i>
+                <p>Username</p>
+              </span>
               <Input
                 type="text"
                 id="username"
@@ -65,7 +72,10 @@ export default function Login() {
           </FormGroup>
           <FormGroup>
             <Label>
-              <p>Password</p>
+              <p>
+                {" "}
+                <i class="bi bi-lock-fill icon-margin"></i>Password
+              </p>
               <Input
                 type="password"
                 id="password"

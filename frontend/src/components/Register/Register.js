@@ -50,11 +50,16 @@ export default function Register() {
   return (
     <div className="register-wrapper">
       <div className="register-content">
-        <h1 id="login-title"> Please register </h1>
+        <h1 id="login-title">
+          {" "}
+          <i class="bi bi-plus-lg icon-margin"></i>Register{" "}
+        </h1>
         <Form onSubmit={handleSubmit}>
           <FormGroup>
             <Label>
-              <p>Username</p>
+              <p>
+                <i class="bi bi-person-heart icon-margin"></i>Username
+              </p>
               <Input
                 type="text"
                 id="username"
@@ -66,7 +71,9 @@ export default function Register() {
           </FormGroup>
           <FormGroup>
             <Label>
-              <p>Password</p>
+              <p>
+                <i class="bi bi-lock-fill icon-margin"></i>Password
+              </p>
               <Input
                 type="password"
                 id="password"

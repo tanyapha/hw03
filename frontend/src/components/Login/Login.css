@@ -21,6 +21,15 @@
   justify-content: right;
 }
 
+.div-left-align {
+  display: flex;
+  justify-content: left;
+}
+
+.div-left-align > i {
+  margin-right: 10px;
+}
+
 .message {
   display: flex;
   justify-content: center;
@@ -37,6 +46,7 @@
 
 #login-title {
   margin-bottom: 25px;
+  margin-right: 10px;
 }
 
 .second-button {
@@ -48,4 +58,8 @@
 .main-button {
   background-color: #3498db !important;
   border-color: #3498db !important;
+}
+
+.icon-margin {
+  margin-right: 10px;
 }
