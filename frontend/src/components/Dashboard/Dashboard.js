@@ -128,7 +128,6 @@ class Dashboard extends React.Component {
         })
         .then((res) => {
           if (res.data.length === 0) {
-            console.log(item);
             this.addRating(item.id, item.rating);
           } else {
             this.updateRating(res.data[0], item.rating);
@@ -146,7 +145,6 @@ class Dashboard extends React.Component {
   };
 
   handleDelete = (item) => {
-    console.log(item);
     axios.delete(`http://localhost:8000/api/song/${item.id}`).then((res) => {
       console.log("DELETED 👋🏼 !!!");
       this.refreshList();
