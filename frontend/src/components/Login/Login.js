@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Form, FormGroup } from "reactstrap";
+import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import axios from "axios";
@@ -52,28 +52,28 @@ export default function Login() {
         <h1 id="login-title"> Please Log In </h1>
         <Form onSubmit={handleSubmit}>
           <FormGroup>
-            <label>
+            <Label>
               <p>Username</p>
-              <input
+              <Input
                 type="text"
                 id="username"
                 value={data.username}
                 placeholder="Enter Username"
                 onChange={(e) => handleChange(e)}
               />
-            </label>
+            </Label>
           </FormGroup>
           <FormGroup>
-            <label>
+            <Label>
               <p>Password</p>
-              <input
+              <Input
                 type="password"
                 id="password"
                 value={data.password}
                 placeholder="Enter Password"
                 onChange={(e) => handleChange(e)}
               />
-            </label>
+            </Label>
           </FormGroup>
           <div className="div-center-align">
             <Button

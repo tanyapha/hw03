@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Form, FormGroup } from "reactstrap";
+import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import "./Register.css";
 import axios from "axios";
 
@@ -53,34 +53,29 @@ export default function Register() {
         <h1 id="login-title"> Please register </h1>
         <Form onSubmit={handleSubmit}>
           <FormGroup>
-            <label>
+            <Label>
               <p>Username</p>
-              <input
+              <Input
                 type="text"
                 id="username"
                 value={data.username}
                 placeholder="Enter Username"
                 onChange={(e) => handleChange(e)}
               />
-            </label>
+            </Label>
           </FormGroup>
           <FormGroup>
-            <label>
+            <Label>
               <p>Password</p>
-              <input
+              <Input
                 type="password"
                 id="password"
                 value={data.password}
                 placeholder="Enter Password"
                 onChange={(e) => handleChange(e)}
               />
-            </label>
+            </Label>
           </FormGroup>
-          <div>
-            {errorShow ? (
-              <div className="message">This username is already used.</div>
-            ) : null}
-          </div>
           <div className="div-center-align">
             <Button
               type="submit"
@@ -90,6 +85,11 @@ export default function Register() {
               {" "}
               Register{" "}
             </Button>
+          </div>
+          <div>
+            {errorShow ? (
+              <div className="message">This username is already used.</div>
+            ) : null}
           </div>
         </Form>
         <div className="login">
