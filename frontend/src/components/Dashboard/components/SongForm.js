@@ -28,7 +28,7 @@ export default class SongForm extends React.Component {
 
   validateInput = (event) => {
     const rating = event.target.value;
-    if (rating < 0 || rating > 5) {
+    if (rating < 1 || rating > 5) {
       this.setState({ validRating: false });
     } else if (rating === "") {
       this.setState({ validRating: null });

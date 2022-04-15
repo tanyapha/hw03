@@ -77,7 +77,7 @@ export default class SongTiles extends React.Component {
               (e) => e.song_id === this.props.songItem.id
             )
               ? "Update"
-              : "Rating"}{" "}
+              : "Rate"}{" "}
           </button>
         </CardBody>
       </Card>
