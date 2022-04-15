@@ -88,6 +88,7 @@ class Dashboard extends React.Component {
       username: localStorage.getItem("user"),
       rating: rating,
     };
+    console.log(addRating);
     axios.post("http://localhost:8000/api/rating/", addRating).then((res) => {
       console.log("yay, your rating has been added!!!");
       this.refreshList();
@@ -137,7 +138,8 @@ class Dashboard extends React.Component {
         })
         .then((res) => {
           if (res.data.length === 0) {
-            this.addRating(item.song_id, item.rating);
+            console.log(item);
+            this.addRating(item.id, item.rating);
           } else {
             this.updateRating(res.data[0], item.rating);
           }
