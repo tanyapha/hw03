@@ -38,14 +38,14 @@ export default class SongTiles extends React.Component {
     return (
       <Card className="card rounded">
         <CardBody className="card-body">
-          <span className="div-right-align">
+          <span className="div-right-align ">
             <button
               onClick={() => editItem(this.props.songItem)}
               className="btn btn-secondary btn-sm"
               disabled={this.props.formShow}
             >
               {" "}
-              Edit{" "}
+              Edit Song Info{" "}
             </button>
             <button
               onClick={() => onDelete(this.props.songItem)}
@@ -67,18 +67,26 @@ export default class SongTiles extends React.Component {
             <span className="songtile-icons">{this.starGenerator()}</span>(
             {this.ratingRound()})
           </CardText>
-          <button
-            onClick={() => rateItem(this.props.songItem)}
-            className="btn btn-success rate-button"
-            disabled={this.props.formShow}
-          >
-            {" "}
-            {this.props.userItem.some(
-              (e) => e.song_id === this.props.songItem.id
-            )
-              ? "Update"
-              : "Rate"}{" "}
-          </button>
+          <div className="div-center-align">
+            <button
+              onClick={() => rateItem(this.props.songItem)}
+              className={`btn btn-success ${
+                this.props.userItem.some(
+                  (e) => e.song_id === this.props.songItem.id
+                )
+                  ? "update-button"
+                  : "rate-button"
+              }`}
+              disabled={this.props.formShow}
+            >
+              {" "}
+              {this.props.userItem.some(
+                (e) => e.song_id === this.props.songItem.id
+              )
+                ? "Update"
+                : "Rate"}{" "}
+            </button>
+          </div>
         </CardBody>
       </Card>
     );

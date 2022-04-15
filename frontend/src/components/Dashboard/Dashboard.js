@@ -198,7 +198,7 @@ class Dashboard extends React.Component {
       <div className="page-container">
         <header className="user-display">
           <div>
-            <span className="div-right-align">
+            <span className=" name-display div-right-align">
               Hi,{" "}
               {localStorage.getItem("user").charAt(0).toUpperCase() +
                 localStorage.getItem("user").slice(1)}
