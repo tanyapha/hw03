@@ -42,19 +42,6 @@ class Dashboard extends React.Component {
       .catch((err) => console.log(err));
   }
 
-  // getUserSongs() {
-  //   axios
-  //     .get("http://localhost:8000/api/rating/", {
-  //       params: { username: localStorage.getItem("user") },
-  //     })
-  //     .then((res) => {
-  //       {
-  //         this.setState({ songList: res.data, formShow: false });
-  //       }
-  //     })
-  //     .catch((err) => console.log(err));
-  // }
-
   //gets the data from the backend
   refreshList = () => {
     this.getAllSongs();
@@ -66,11 +53,6 @@ class Dashboard extends React.Component {
         this.setState({ userItem: res.data });
         console.log(res.data);
       });
-    // if (this.state.allSongs) {
-    //   this.getAllSongs();
-    // } else {
-    //   this.getUserSongs();
-    // }
   };
 
   //displaying the songlist on the web using the SongTiles
@@ -221,19 +203,6 @@ class Dashboard extends React.Component {
               {localStorage.getItem("user").charAt(0).toUpperCase() +
                 localStorage.getItem("user").slice(1)}
               !
-            </span>
-            <span className="form-check form-switch div-right-align">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                role="switch"
-                id="flexSwitchCheckChecked"
-                onChange={this.handleToggle}
-                checked={this.state.allSongs}
-              />
-              <label className="form-check-label" for="flexSwitchCheckChecked">
-                {this.state.allSongs ? "All Rated Songs" : "User Rated Songs"}
-              </label>
             </span>
           </div>
         </header>
