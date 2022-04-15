@@ -37,15 +37,27 @@ npm install bootstrap-icons
 ## 3. Run the app
 Backend:
 ```shell
+cd backend
 python3 manage.py runserver
 ```
 Frontend:
 ```shell
+cd frontend
 npm start
 ```
 
-## 4. Test APIs using Postman for user authentication
+## 4. How to use the app
+If you want to add a new song, click "new song" and add.
+If you want to add a rating of a song that someone has already rated, click "Rate" on the song. Now, the button should change to "Update".
+If you want to update your rating, click "Update".
+
+---------------------------------------------------------------------------------------------
+
+If you want to test backend, please check the following.
+
+## Test APIs using Postman for user authentication
 Download desktop client from Postman at <https://www.postman.com/downloads/>.
+
 ### Registration:
 To send a POST request to <http://127.0.0.1:8000/api/auth/register> via Postman, you can choose Content-Type as `key` and application/json as `value` in the `Headers`. Then in the `body`, select `raw` and include the following:
 ```shell
@@ -66,6 +78,3 @@ Now, send a GET request to <http://127.0.0.1:8000/api/auth/user>, you need to ch
 In your broswer, go to <http://localhost:3000/>. You will see a log in page if you have not logged in successfully yet. After you submit a username with password that has already registered, you will be able to see the list of songs' ratings in our database.
 
 To check the song ratings dashboard, in your browser go to <http://localhost:3000/Dashboard>.
-
-
-
