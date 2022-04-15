@@ -1,0 +1,43 @@
+.login-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.login-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.div-center-align {
+  display: flex;
+  justify-content: center;
+}
+
+.div-right-align {
+  display: flex;
+  justify-content: right;
+}
+
+.message {
+  display: flex;
+  justify-content: center;
+  color: red;
+  margin-bottom: 10px;
+}
+
+.register {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+#login-title {
+  margin-bottom: 25px;
+}
+
+button {
+  margin-left: 20px;
+}

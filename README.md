@@ -29,10 +29,9 @@ python3 -m pip install django-rest-knox
 ### 2.2 React
 
 ```shell
-npm i --save @fortawesome/fontawesome-svg-core
-npm install --save @fortawesome/free-solid-svg-icons
-npm install --save @fortawesome/react-fontawesome
-npm install --save react-router-dom@6
+npm install react-router-dom@6
+npm install --save-dev @babel/preset-react
+npm install bootstrap-icons
 ```
 
 ## 3. Run the app
@@ -64,7 +63,9 @@ To send a POST request to <http://127.0.0.1:8000/api/auth/login> via Postman, ju
 Now, send a GET request to <http://127.0.0.1:8000/api/auth/user>, you need to choose Authorization as `key` and paste the token you get from log-in with 'Token ' in front of it as `Value` in the `Headers`. For example: "Token 78d2b3c0edc368eb416c0a76e55a6378df3ddb1721137ca5571d1cd69c3bcc06"
 
 ## 5. Using the Songrater main App
-In your broswer, go to <http://localhost:3000/Dashboard>. You will see a log in page if you have not logged in successfully yet. After you submit a username with password that has already registered, you will be able to see the list of songs' ratings in our database.
+In your broswer, go to <http://localhost:3000/>. You will see a log in page if you have not logged in successfully yet. After you submit a username with password that has already registered, you will be able to see the list of songs' ratings in our database.
+
+To check the song ratings dashboard, in your browser go to <http://localhost:3000/Dashboard>.
 
 
 

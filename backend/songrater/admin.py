@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User, Rating
+from .models import Song, User, Rating
 
 # Register your models here.
 class UserAdmin(admin.ModelAdmin):
@@ -7,7 +7,11 @@ class UserAdmin(admin.ModelAdmin):
 
 admin.site.register(User,UserAdmin)
 
-class RatingAdmin(admin.ModelAdmin):
-    list_display = ["id","username","song","artist","rating"]
+class SongAdmin(admin.ModelAdmin):
+    list_display = ["id","song","artist"]
+admin.site.register(Song,SongAdmin)
 
+class RatingAdmin(admin.ModelAdmin):
+    list_display = ["id","song_id","username","rating"]
 admin.site.register(Rating,RatingAdmin)
+
