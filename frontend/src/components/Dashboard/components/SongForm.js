@@ -18,6 +18,20 @@ export default class SongForm extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this.getRatingValue();
+  }
+
+  getRatingValue() {
+    let prev = this.props.userItem.find(
+      (el) => el.song_id === this.state.songItem.id
+    );
+    if (prev) {
+      const songItem = { ...this.state.songItem, ["rating"]: prev.rating };
+      this.setState({ songItem: songItem });
+    }
+  }
+
   // change the values in the input field
   handleChange = (event) => {
     let { name, value } = event.target;

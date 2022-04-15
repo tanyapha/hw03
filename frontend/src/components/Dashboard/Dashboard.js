@@ -214,6 +214,7 @@ class Dashboard extends React.Component {
               closeForm={this.closeForm}
               currentlyEditing={this.state.currentlyEditing}
               currentlyRating={this.state.currentlyRating}
+              userItem={this.state.userItem}
             />
           </ModalBody>
         </Modal>
