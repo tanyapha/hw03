@@ -75,16 +75,9 @@ export default function Login() {
               />
             </label>
           </FormGroup>
-          <div>
-            {errorShow ? (
-              <div className="message">
-                Incorrect credentials. Please try with a different username or
-                password.
-              </div>
-            ) : null}
-          </div>
           <div className="div-center-align">
             <Button
+              className="main-button"
               type="submit"
               disabled={data.username === "" || data.password === ""}
             >
@@ -93,9 +86,18 @@ export default function Login() {
             </Button>
           </div>
         </Form>
+        <div>
+          {errorShow ? (
+            <div className="message">Incorrect username or password.</div>
+          ) : null}
+        </div>
+
         <div className="register">
           <div>Don't have an account?</div>
-          <button onClick={routeChange}> Register here </button>
+          <Button className="second-button" onClick={routeChange}>
+            {" "}
+            Register here{" "}
+          </Button>
         </div>
       </body>
     </div>

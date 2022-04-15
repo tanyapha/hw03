@@ -37,3 +37,14 @@
 #register-title {
   margin-bottom: 25px;
 }
+
+.main-button {
+  background-color: #3498db !important;
+  border-color: #3498db !important;
+}
+
+.second-button {
+  margin-left: 20px;
+  background-color: #27ae60;
+  border-color: #27ae60;
+}
