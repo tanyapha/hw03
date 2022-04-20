@@ -1,6 +1,5 @@
 from pyexpat import model
-from tkinter import CASCADE
-from turtle import mode
+from django.db.models.deletion import CASCADE
 from django.db import models
 
 class User(models.Model):
