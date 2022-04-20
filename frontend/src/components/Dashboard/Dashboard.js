@@ -6,6 +6,8 @@ import SongTiles from "./components/SongTiles";
 import { Form, Modal, ModalBody, FormGroup, Input, Label } from "reactstrap";
 
 class Dashboard extends React.Component {
+  API = "https://song-rater.herokuapp.com/api/";
+
   constructor(props) {
     super(props);
 
@@ -25,6 +27,7 @@ class Dashboard extends React.Component {
       allSongs: true,
     };
   }
+
   //load the list for the first time we enter the site
   componentDidMount() {
     this.refreshList();
@@ -32,10 +35,9 @@ class Dashboard extends React.Component {
 
   getAllSongs() {
     axios
-      .get("http://localhost:8000/api/song/")
+      .get(this.API + "song/")
       .then((res) => {
         {
-          console.log(res.data);
           this.setState({ songList: res.data, formShow: false });
         }
       })
@@ -46,12 +48,11 @@ class Dashboard extends React.Component {
   refreshList = () => {
     this.getAllSongs();
     axios
-      .get("http://localhost:8000/api/rating/", {
+      .get(this.API + "rating/", {
         params: { username: localStorage.getItem("user") },
       })
       .then((res) => {
         this.setState({ userItem: res.data });
-        console.log(res.data);
       });
   };
 
@@ -80,7 +81,7 @@ class Dashboard extends React.Component {
       username: localStorage.getItem("user"),
       rating: rating,
     };
-    axios.post("http://localhost:8000/api/rating/", addRating).then((res) => {
+    axios.post(this.API + "rating/", addRating).then((res) => {
       console.log("yay, your rating has been added!!!");
       this.refreshList();
     });
@@ -89,7 +90,7 @@ class Dashboard extends React.Component {
   updateRating = (song_info, rating) => {
     const updateRating = { ...song_info, rating: rating };
     axios
-      .put(`http://localhost:8000/api/rating/${updateRating.id}/`, updateRating)
+      .put(this.API + `rating/${updateRating.id}/`, updateRating)
       .then((res) => {
         console.log("yay, its been updated 😍!!!");
         this.refreshList();
@@ -98,7 +99,7 @@ class Dashboard extends React.Component {
 
   addSong(item) {
     axios
-      .post("http://localhost:8000/api/song/", {
+      .post(this.API + "song/", {
         song: item.song,
         artist: item.artist,
       })
@@ -110,12 +111,10 @@ class Dashboard extends React.Component {
 
   updateSong(song, artist, id) {
     const updateSong = { song: song, artist: artist };
-    axios
-      .put(`http://localhost:8000/api/song/${id}/`, updateSong)
-      .then((res) => {
-        console.log("yay, the song has been updated 😍!!!");
-        this.refreshList();
-      });
+    axios.put(this.API + `song/${id}/`, updateSong).then((res) => {
+      console.log("yay, the song has been updated 😍!!!");
+      this.refreshList();
+    });
   }
 
   // what to do when we add information
@@ -123,7 +122,7 @@ class Dashboard extends React.Component {
     if (this.state.currentlyRating) {
       //check to see if there is already a rating
       axios
-        .get("http://localhost:8000/api/rating/", {
+        .get(this.API + "rating/", {
           params: { username: localStorage.getItem("user"), song_id: item.id },
         })
         .then((res) => {
@@ -145,7 +144,7 @@ class Dashboard extends React.Component {
   };
 
   handleDelete = (item) => {
-    axios.delete(`http://localhost:8000/api/song/${item.id}`).then((res) => {
+    axios.delete(this.API + `song/${item.id}`).then((res) => {
       console.log("DELETED 👋🏼 !!!");
       this.refreshList();
     });

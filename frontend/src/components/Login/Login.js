@@ -18,7 +18,6 @@ export default function Login() {
     const newdata = { ...data };
     newdata[e.target.id] = e.target.value;
     setData(newdata);
-    console.log(newdata);
   }
 
   // helper function 2
@@ -26,7 +25,7 @@ export default function Login() {
     e.preventDefault();
     axios({
       method: "post",
-      url: "http://127.0.0.1:8000/api/auth/login",
+      url: "https://song-rater.herokuapp.com/api/auth/login",
       data: {
         username: data.username,
         password: data.password,
@@ -34,7 +33,6 @@ export default function Login() {
       headers: { "Content-Type": "application/json" },
     })
       .then((res) => {
-        console.log(res);
         window.localStorage.setItem("token", res.data.token);
         window.localStorage.setItem("user", res.data.user.username);
         alert("Successfully logged in!");

@@ -20,7 +20,6 @@ export default function Register() {
     const newdata = { ...data };
     newdata[e.target.id] = e.target.value;
     setData(newdata);
-    console.log(newdata);
   }
 
   // helper function 2
@@ -28,7 +27,7 @@ export default function Register() {
     e.preventDefault();
     axios({
       method: "post",
-      url: "http://127.0.0.1:8000/api/auth/register",
+      url: "https://song-rater.herokuapp.com/api/auth/register",
       data: {
         username: data.username,
         password: data.password,
@@ -36,7 +35,6 @@ export default function Register() {
       headers: { "Content-Type": "application/json" },
     })
       .then((res) => {
-        console.log(res.data);
         alert("Successfully registered!");
         navigate("/");
       })
