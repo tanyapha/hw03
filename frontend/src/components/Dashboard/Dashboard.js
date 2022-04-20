@@ -6,7 +6,7 @@ import SongTiles from "./components/SongTiles";
 import { Form, Modal, ModalBody, FormGroup, Input, Label } from "reactstrap";
 
 class Dashboard extends React.Component {
-  API = "https://song-rater.herokuapp.com/api/";
+  API = "https://songrater-comp333.herokuapp.com/api/";
 
   constructor(props) {
     super(props);

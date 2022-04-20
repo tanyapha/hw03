@@ -27,7 +27,7 @@ export default function Register() {
     e.preventDefault();
     axios({
       method: "post",
-      url: "https://song-rater.herokuapp.com/api/auth/register",
+      url: "https://songrater-comp333.herokuapp.com/api/auth/register",
       data: {
         username: data.username,
         password: data.password,
