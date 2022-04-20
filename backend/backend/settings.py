@@ -66,7 +66,10 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     'https://localhost:3000',
-    'http://localhost:3000'
+    'http://localhost:3000',
+    'https://songrater-comp333.firebaseapp.com/',
+    'https://songrater-comp333.web.app/'
+
 ]
 
 REST_FRAMEWORK = {
@@ -101,7 +104,7 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR + "/" + 'db.sqlite3',
     }
 }
 
@@ -154,4 +157,4 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
-# DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
