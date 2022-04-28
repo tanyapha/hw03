@@ -68,7 +68,9 @@ CORS_ALLOWED_ORIGINS = [
     'https://localhost:3000',
     'http://localhost:3000',
     'https://songrater-comp333.firebaseapp.com/',
-    'https://songrater-comp333.web.app/'
+    'https://songrater-comp333.web.app/',
+    'http://localhost:19002',
+    'exp://192.168.1.198:19000'
 
 ]
 
