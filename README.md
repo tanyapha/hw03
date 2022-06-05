@@ -1,9 +1,7 @@
-# HW03
-comp333 hw3
-
-software 333 hw3
-
 check out the deployed site 🚀 : https://songrater-comp333.firebaseapp.com/
+
+# Song Rater Website HW03
+comp333 hw3
 
 ## 1. Creating a Virtual Environment
 Install the virtual environment, `django-react`, with:
