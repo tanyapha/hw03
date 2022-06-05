@@ -3,6 +3,8 @@ comp333 hw3
 
 software 333 hw3
 
+check out the deployed site 🚀 : https://songrater-comp333.firebaseapp.com/
+
 ## 1. Creating a Virtual Environment
 Install the virtual environment, `django-react`, with:
 ```shell
